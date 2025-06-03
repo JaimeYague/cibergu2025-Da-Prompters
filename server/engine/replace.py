@@ -1,10 +1,22 @@
 contador = 0
 
-def replace(input: str):
-    global contador
+def dev_count(func):
+    def wrapper(*args, **kwargs):
+        global contador
+        contador += 1
 
-    contador += 1
-    print(f"{str(contador).rjust(3)} -- {input}")
+        print(f"{str(contador).rjust(3)} -- {args[0]}")
+        res = func(*args, **kwargs)
+        print(f"{str(contador).rjust(3)} -- {res}")
+        
+        return res
+
+    return wrapper
+
+
+# Applying the decorator to a function
+@dev_count
+def replace(input: str):
     output = input.replace("SENSIBLE", "CENSURADO")
-    
+
     return output
