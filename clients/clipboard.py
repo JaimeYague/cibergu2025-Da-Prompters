@@ -1,15 +1,14 @@
 import urllib.parse
 import requests
-
 from pyperadaptor import pyperclip, waitForNewPaste
-
-SERVER = "http://localhost:5000"
+from constants import *
 
 
 print("PysingScan listening clipboard...")
 while True:
     txt = waitForNewPaste()
-    print(f"CLIPBOARD: {txt}")
+    if(DEV):
+        print(f"CLIPBOARD: {txt}")
 
     # 2. URL-encodear la cadena entera
     encoded = urllib.parse.quote(txt, safe="")  
@@ -17,7 +16,8 @@ while True:
     response = requests.get(f"{SERVER}/replace/{encoded}")
     out = str(response.text)
 
-    print(f"FILTERED:  {out}")
+    if(DEV):
+        print(f"FILTERED:  {out}")
 
     pyperclip.copy(out)
 
