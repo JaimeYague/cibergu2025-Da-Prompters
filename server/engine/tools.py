@@ -12,11 +12,3 @@ def dev_count(func):
         return res
 
     return wrapper
-
-
-# Applying the decorator to a function
-@dev_count
-def replace(input: str):
-    output = input.replace("SENSIBLE", "CENSURADO")
-
-    return output
