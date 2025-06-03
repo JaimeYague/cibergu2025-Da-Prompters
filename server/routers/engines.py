@@ -3,6 +3,7 @@
 from fastapi import APIRouter
 from random import randint
 from ..engine import replace
+from ..engine import regex
 
 router = APIRouter()
 
@@ -13,3 +14,7 @@ async def read_root():
 @router.get("/replace/{mensaje}")
 async def sust(mensaje: str):
     return replace.replace(mensaje)
+
+@router.get("/regex/{mensaje}")
+async def sust(mensaje: str):
+    return regex.replace(mensaje)
