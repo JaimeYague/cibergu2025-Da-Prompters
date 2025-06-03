@@ -15,6 +15,7 @@ def waitForPaste(timeout=None):
     while True:
         clipboardText = pyperclip.paste()
         if clipboardText != '':
+            print(type(clipboardText))
             return clipboardText
         time.sleep(0.01)
 
