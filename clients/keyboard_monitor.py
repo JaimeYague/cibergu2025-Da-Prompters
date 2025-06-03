@@ -31,9 +31,10 @@ def on_key_event(e):
     # Limitar tamaño del buffer
     BUFFER = BUFFER[-MAX_BUFFER:]
 
-    # Verificar si hay datos sensibles
-    encoded = urllib.parse.quote(BUFFER, safe="")  
-    response = requests.get(f"{SERVER}/replace/{encoded}")
+    payload = {"mensaje": BUFFER}
+    response = requests.post(f"{SERVER}/replace", json=payload)
+    out = str(response.text)
+
     sanitized = str(response.text)
 
     if sanitized != BUFFER:

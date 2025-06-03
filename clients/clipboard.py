@@ -1,23 +1,22 @@
-import urllib.parse
 import requests
 from pyperadaptor import pyperclip, waitForNewPaste
-from constants import *
+from constants import SERVER, DEV
 
+# CLIENT
 
 print("PysingScan listening clipboard...")
 while True:
     txt = waitForNewPaste()
-    if(DEV):
+
+
+    if DEV:
         print(f"CLIPBOARD: {txt}")
 
-    # 2. URL-encodear la cadena entera
-    encoded = urllib.parse.quote(txt, safe="")  
-
-    response = requests.get(f"{SERVER}/replace/{encoded}")
+    payload = {"mensaje": txt}
+    response = requests.post(f"{SERVER}/replace", json=payload)
     out = str(response.text)
 
-    if(DEV):
+    if DEV:
         print(f"FILTERED:  {out}")
 
     pyperclip.copy(out)
-
