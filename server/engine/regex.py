@@ -1,10 +1,13 @@
-contador = 0
+import re
+import urllib.parse
 
-def replace(input: str):
-    global contador
+from .patterns import SENSITIVE_PATTERNS
+from .tools import dev_count
 
-    contador += 1
-    print(f"{str(contador).rjust(3)} -- {input}")
-    output = input.replace("SENSIBLE", "CENSURADO")
-    
-    return output
+@dev_count
+def replace(message: str):
+    sanitized = urllib.parse.unquote(message)
+    for pattern, replacement in SENSITIVE_PATTERNS:
+        sanitized = re.sub(pattern, replacement, sanitized)
+    return sanitized
+

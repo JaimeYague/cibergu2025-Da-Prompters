@@ -1,6 +1,6 @@
 # Lista de patrones sensibles y su reemplazo
 
-SENSITIVE_PATTERNS += [
+SENSITIVE_PATTERNS = [
     (r"\bES\d{2}\s?\d{4}\s?\d{4}\s?\d{2}\s?\d{10}\b", "### IBAN ###"),
     (r"\b\d{4}\s?\d{4}\s?\d{2}\s?\d{10}\b", "### CCC ###"),
     (r"\b[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?\b", "### SWIFT/BIC ###"),
